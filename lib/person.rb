@@ -1,83 +1,75 @@
 class Person
-    attr_accessor :bank_acc, :happy_pnts, :hyg_pnts
-
-    attr_reader :name
-    def initialize(name, bank_acc=25, happy_pnts=8, hyg_pnts=8)
-      @name = name
-      @bank_acc = bank_acc
-      @happy_pnts = happy_pnts
-      @hyg_pnts = hyg_pnts
+  attr_accessor :bank_account
+  attr_reader :name, :happiness, :hygiene
+  def initialize(name, bank_account=25, happiness=8, hygiene=8)
+    @name = name
+    @bank_account = bank_account
+    @happiness = happiness
+    @hygiene = hygiene
+  end
+  def happiness=(points)
+    @happiness = points
+    if @happiness > 10
+      @happiness = 10
+    elsif @happiness < 0
+      @happiness = 0
+    else
+      @happiness
     end
-    # maximum for happy and hygiene: 10
-    # minimum for happy and hygiene: 0
-    # Create a method with maximum hygiene and happy points
-    def maximum_pnts
-      # conditional statement to check if happy_pnts or hyg_pnts are less than or equal to 10
-        # DO SOMETHING 
-      # ELSE
-       # DO SOMETHING ELSE (POSSIBLY A MESSAGE)
+  end
+  def hygiene=(points)
+    @hygiene = points
+    if @hygiene > 10
+      @hygiene = 10
+    elsif @hygiene < 0
+      @hygiene = 0
+    else
+      @hygiene
     end
-    # Create a method with minimum hygiene and happy points
-    def minimum_pnts 
-       # conditional statement to check if happy_pnts or hyg_pnts are greater than or equal to 0
-        # DO SOMETHING 
-      # ELSE
-       # DO SOMETHING ELSE (POSSIBLY A MESSAGE)
+  end
+  def clean?
+    if @hygiene > 7
+      true
+    else 
+      false
     end
-
-    
-    # def check_points
-      
-    # end
-    
-    
-    def clean?
-      if @hyg_pnts > 7
-        true
-      else 
-        false
-      end
+  end
+  def happy?
+    if @happiness > 7
+      true
+    else 
+      false
     end
-    
-    def happy?
-      if @happy_pnts_pnts > 7
-        true
-      else 
-        false
-      end
+  end
+  def get_paid(salary_amount)
+      @bank_account += salary_amount
+      "all about the benjamins"
+  end
+  def take_bath
+      self.hygiene+=4
+      "♪ Rub-a-dub just relaxing in the tub ♫"
+  end
+  def work_out
+    self.happiness+=2
+    self.hygiene-=3
+    "♪ another one bites the dust ♫"
+  end
+  def call_friend(friend)
+    self.happiness+=3
+    friend.happiness+=3
+    "Hi #{friend.name}! It's #{@name}. How are you?"
+  end
+  def start_conversation(friend, topic)
+    if topic == "politics"
+      friend.happiness-=2
+      self.happiness-=2
+      "blah blah partisan blah lobbyist"
+    elsif topic == "weather"
+      friend.happiness+=1
+      self.happiness+=1
+      "blah blah sun blah rain"
+    else
+      "blah blah blah blah blah"
     end
-
-    def get_paid(salary_amount)
-        @bank_acc += salary_amount
-        "all the about the benjamins"
-    end
-
-    def take_bath
-        @hyg_pnts += 4 
-        "♪ Rub-a-dub just relaxing in the tub ♫"
-    end
-
-    def workout
-        @happy_pnts += 2
-        @hyg_pnts -= 3
-        "♪ another one bites the dust ♫"
-    end
-
-    def call_friend(friend)
-        puts "Inside method"
-        puts friend
-        @happy_pnts += 3
-        friend.happy_pnts += 3
-        puts "Hi #{@name}! It's #{friend.name}. How are you?"
-
-    end
-
-    
-    
+  end
 end
-
-# stella = Person.new("Stella")
-# felix = Person.new("Felix")
-# puts felix
-# stella.call_friend(felix)
-
